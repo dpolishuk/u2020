@@ -1,13 +1,7 @@
 package com.jakewharton.u2020;
 
 final class Modules {
-  static Object[] list(U2020App app) {
-    return new Object[] {
-        new U2020Module(app)
-    };
-  }
-
-  private Modules() {
-    // No instances.
+  static BaseComponent getComponent(U2020App app) {
+    return DaggerU2020Component.builder().u2020Module(new U2020Module(app)).build();
   }
 }

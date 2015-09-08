@@ -1,7 +1,5 @@
 package com.jakewharton.u2020.ui;
 
-import com.jakewharton.u2020.BaseComponent;
-import com.jakewharton.u2020.ui.debug.DebugView;
 import com.jakewharton.u2020.ui.trending.TrendingView;
 import dagger.Subcomponent;
 import javax.inject.Singleton;
@@ -11,7 +9,7 @@ import javax.inject.Singleton;
  */
 @Singleton
 @Subcomponent(modules = MainActivityModule.class)
-public interface MainActivityComponent extends ActivityComponent {
+public interface MainActivityComponent {
   void inject(TrendingView trendingView);
 
 }
