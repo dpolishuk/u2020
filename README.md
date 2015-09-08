@@ -63,7 +63,7 @@ injected into each mock service which uses its methods to query and mutate state
 Libraries
 ---------
 
- * Dagger - http://square.github.io/dagger
+ * Dagger2 - http://google.github.io/dagger
  * ButterKnife - http://jakewharton.github.io/butterknife
  * Retrofit - http://square.github.io/retrofit
  * Picasso - http://square.github.io/picasso
