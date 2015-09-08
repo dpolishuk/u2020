@@ -1,6 +1,8 @@
 package com.jakewharton.u2020.data.api;
 
 import android.content.SharedPreferences;
+import com.google.gson.Gson;
+import com.jakewharton.u2020.CommonsModule;
 import com.jakewharton.u2020.data.ApiEndpoint;
 import com.jakewharton.u2020.data.IsMockMode;
 import com.jakewharton.u2020.data.api.oauth.OauthInterceptor;
@@ -15,11 +17,14 @@ import retrofit.Endpoints;
 import retrofit.MockRestAdapter;
 import retrofit.RestAdapter;
 import retrofit.android.AndroidMockValuePersistence;
+import retrofit.client.OkClient;
+import retrofit.converter.GsonConverter;
 
 @Module(
-    complete = false,
-    library = true,
-    overrides = true
+    includes = CommonsModule.class
+    //complete = false,
+    //library = true,
+    //overrides = true
 )
 public final class DebugApiModule {
 
@@ -35,6 +40,14 @@ public final class DebugApiModule {
     return client;
   }
 
+  @Provides @Singleton RestAdapter provideRestAdapter(Endpoint endpoint,
+      @Named("Api") OkHttpClient client, Gson gson) {
+    return new RestAdapter.Builder() //
+        .setClient(new OkClient(client)) //
+        .setEndpoint(endpoint) //
+        .setConverter(new GsonConverter(gson)) //
+        .build();
+  }
 
   @Provides @Singleton
   MockRestAdapter provideMockRestAdapter(RestAdapter restAdapter, SharedPreferences preferences) {

@@ -5,11 +5,9 @@ import dagger.Provides;
 import javax.inject.Singleton;
 
 @Module(
-    injects = {
-        MainActivity.class,
-    },
-    complete = false,
-    library = true
+    //injects = {
+    //    MainActivity.class,
+    //},
 )
 public final class UiModule {
   @Provides @Singleton AppContainer provideAppContainer() {

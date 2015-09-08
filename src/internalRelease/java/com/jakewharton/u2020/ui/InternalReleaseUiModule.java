@@ -5,9 +5,9 @@ import dagger.Provides;
 import javax.inject.Singleton;
 
 @Module(
-    overrides = true,
-    library = true,
-    complete = false
+    //overrides = true,
+    //library = true,
+    //complete = false
 )
 public final class InternalReleaseUiModule {
   @Provides @Singleton AppContainer provideAppContainer(

@@ -21,6 +21,7 @@ import butterknife.BindDimen;
 import butterknife.ButterKnife;
 import butterknife.OnItemSelected;
 import com.jakewharton.u2020.R;
+import com.jakewharton.u2020.U2020Component;
 import com.jakewharton.u2020.data.Injector;
 import com.jakewharton.u2020.data.IntentFactory;
 import com.jakewharton.u2020.data.api.GithubService;
@@ -30,6 +31,9 @@ import com.jakewharton.u2020.data.api.Sort;
 import com.jakewharton.u2020.data.api.model.RepositoriesResponse;
 import com.jakewharton.u2020.data.api.model.Repository;
 import com.jakewharton.u2020.data.api.transforms.SearchResultToRepositoryList;
+import com.jakewharton.u2020.ui.MainActivity;
+import com.jakewharton.u2020.ui.MainActivityComponent;
+import com.jakewharton.u2020.ui.MainActivityModule;
 import com.jakewharton.u2020.ui.misc.BetterViewAnimator;
 import com.jakewharton.u2020.ui.misc.DividerItemDecoration;
 import com.jakewharton.u2020.ui.misc.EnumAdapter;
@@ -70,7 +74,9 @@ public final class TrendingView extends LinearLayout
   public TrendingView(Context context, AttributeSet attrs) {
     super(context, attrs);
     if (!isInEditMode()) {
-      Injector.obtain(context).inject(this);
+      U2020Component appGraph = (U2020Component) Injector.obtain(context);
+      MainActivityComponent component = appGraph.plus(new MainActivityModule((MainActivity) context));
+      component.inject(this);
     }
 
     timespanSubject = PublishSubject.create();
@@ -121,8 +127,7 @@ public final class TrendingView extends LinearLayout
 
     subscriptions.add(timespanSubject //
         .flatMap(trendingSearch) //
-        .map(SearchResultToRepositoryList.instance())
-        .subscribe(trendingAdapter));
+        .map(SearchResultToRepositoryList.instance()).subscribe(trendingAdapter));
 
     // Load the default selection.
     onRefresh();

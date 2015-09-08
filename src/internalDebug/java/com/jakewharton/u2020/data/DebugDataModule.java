@@ -28,10 +28,10 @@ import rx.Observable;
 import timber.log.Timber;
 
 @Module(
-    includes = DebugApiModule.class,
-    complete = false,
-    library = true,
-    overrides = true
+    includes = DebugApiModule.class
+    //complete = false,
+    //library = true,
+    //overrides = true
 )
 public final class DebugDataModule {
   private static final int DEFAULT_ANIMATION_SPEED = 1; // 1x (normal) speed.

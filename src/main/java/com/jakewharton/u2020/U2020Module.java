@@ -11,9 +11,6 @@ import javax.inject.Singleton;
     includes = {
         UiModule.class,
         DataModule.class
-    },
-    injects = {
-        U2020App.class
     }
 )
 public final class U2020Module {

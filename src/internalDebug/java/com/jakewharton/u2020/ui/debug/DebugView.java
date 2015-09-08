@@ -24,6 +24,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.jakewharton.processphoenix.ProcessPhoenix;
 import com.jakewharton.u2020.BuildConfig;
+import com.jakewharton.u2020.DebugU2020Component;
 import com.jakewharton.u2020.R;
 import com.jakewharton.u2020.data.AnimationSpeed;
 import com.jakewharton.u2020.data.ApiEndpoint;
@@ -149,7 +150,8 @@ public final class DebugView extends FrameLayout {
 
   public DebugView(Context context, AttributeSet attrs) {
     super(context, attrs);
-    Injector.obtain(context).inject(this);
+    DebugU2020Component component = (DebugU2020Component) Injector.obtain(context);
+    component.inject(this);
 
     // Inflate all of the controls and inject them.
     LayoutInflater.from(context).inflate(R.layout.debug_view_content, this);

@@ -1,14 +1,12 @@
 package com.jakewharton.u2020;
 
-final class Modules {
-  static Object[] list(U2020App app) {
-    return new Object[] {
-        new U2020Module(app),
-        new DebugU2020Module()
-    };
-  }
+import android.app.Application;
 
-  private Modules() {
-    // No instances.
+/**
+ * Created by deepol on 08/09/15.
+ */
+final class Modules {
+  static BaseComponent getComponent(U2020App app) {
+    return DaggerDebugU2020Component.builder().debugU2020Module(new DebugU2020Module(app)).build();
   }
 }

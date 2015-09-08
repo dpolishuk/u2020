@@ -20,11 +20,9 @@ import butterknife.Bind;
 import butterknife.BindColor;
 import butterknife.ButterKnife;
 import com.jakewharton.u2020.R;
+import com.jakewharton.u2020.U2020Component;
 import com.jakewharton.u2020.data.Injector;
-import com.jakewharton.u2020.data.api.oauth.OauthManager;
 import com.jakewharton.u2020.data.api.oauth.OauthService;
-import com.jakewharton.u2020.util.Intents;
-import dagger.ObjectGraph;
 import javax.inject.Inject;
 
 import static android.widget.Toast.LENGTH_SHORT;
@@ -38,7 +36,7 @@ public final class MainActivity extends Activity {
 
   @Inject AppContainer appContainer;
 
-  private ObjectGraph activityGraph;
+  U2020Component appGraph;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -50,9 +48,8 @@ public final class MainActivity extends Activity {
     }
 
     // Explicitly reference the application object since we don't want to match our own injector.
-    ObjectGraph appGraph = Injector.obtain(getApplication());
+    this.appGraph = (U2020Component) Injector.obtain(getApplication());
     appGraph.inject(this);
-    activityGraph = appGraph.plus(new MainActivityModule(this));
 
     ViewGroup container = appContainer.bind(this);
 
@@ -88,14 +85,9 @@ public final class MainActivity extends Activity {
 
   @Override public Object getSystemService(@NonNull String name) {
     if (Injector.matchesService(name)) {
-      return activityGraph;
+      return this.appGraph;
     }
     return super.getSystemService(name);
-  }
-
-  @Override protected void onDestroy() {
-    activityGraph = null;
-    super.onDestroy();
   }
 
   @Override protected void onNewIntent(Intent intent) {

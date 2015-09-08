@@ -25,29 +25,13 @@ import static com.jakewharton.byteunits.DecimalByteUnit.MEGABYTES;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
 @Module(
-    includes = ApiModule.class,
-    complete = false,
-    library = true
+    includes = ApiModule.class
 )
 public final class DataModule {
   static final int DISK_CACHE_SIZE = (int) MEGABYTES.toBytes(50);
 
-  @Provides @Singleton SharedPreferences provideSharedPreferences(Application app) {
-    return app.getSharedPreferences("u2020", MODE_PRIVATE);
-  }
-
   @Provides @Singleton @AccessToken StringPreference provideAccessToken(SharedPreferences prefs) {
     return new StringPreference(prefs, "access-token");
-  }
-
-  @Provides @Singleton Gson provideGson() {
-    return new GsonBuilder()
-        .registerTypeAdapter(Instant.class, new InstantConverter().nullSafe())
-        .create();
-  }
-
-  @Provides @Singleton Clock provideClock() {
-    return Clock.systemDefaultZone();
   }
 
   @Provides @Singleton IntentFactory provideIntentFactory() {

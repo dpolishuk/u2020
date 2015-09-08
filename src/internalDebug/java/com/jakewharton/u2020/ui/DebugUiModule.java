@@ -9,13 +9,13 @@ import dagger.Provides;
 import javax.inject.Singleton;
 
 @Module(
-    injects = {
-        DebugAppContainer.class,
-        DebugView.class,
-    },
-    complete = false,
-    library = true,
-    overrides = true
+    //injects = {
+    //    DebugAppContainer.class,
+    //    DebugView.class,
+    //},
+    //complete = false,
+    //library = true,
+    //overrides = true
 )
 public class DebugUiModule {
   @Provides @Singleton AppContainer provideAppContainer(DebugAppContainer debugAppContainer,

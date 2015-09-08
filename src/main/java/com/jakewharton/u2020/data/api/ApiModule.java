@@ -1,6 +1,7 @@
 package com.jakewharton.u2020.data.api;
 
 import com.google.gson.Gson;
+import com.jakewharton.u2020.CommonsModule;
 import com.jakewharton.u2020.data.api.oauth.OauthInterceptor;
 import com.jakewharton.u2020.data.api.oauth.OauthService;
 import com.squareup.okhttp.OkHttpClient;
@@ -15,11 +16,10 @@ import retrofit.client.OkClient;
 import retrofit.converter.GsonConverter;
 
 @Module(
-    complete = false,
-    library = true,
-    injects = {
-        OauthService.class
-    }
+    includes = CommonsModule.class
+    //injects = {
+    //    OauthService.class
+    //}
 )
 public final class ApiModule {
   public static final String PRODUCTION_API_URL = "https://api.github.com";
